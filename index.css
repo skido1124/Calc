@@ -1,0 +1,61 @@
+@charset "UTF-8";
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+.container {
+  height: 100%;
+}
+
+.result {
+  height: 25%;
+  background-color: black;
+  color: white;
+}
+
+.buttons {
+  height: 75%;
+}
+
+.row {
+  height: 20%;
+  display: flex;
+}
+
+.row .cell {
+  border-top: 1px solid #ccc;
+  border-left: 1px solid #ccc;
+}
+
+.row .cell:first-child {
+  border-left: none;
+}
+
+.column {
+  flex-grow: 1;
+}
+
+.column2 {
+  flex-grow: 2;
+}
+
+.cell {
+  position: relative;
+  height: 100%;
+  cursor: pointer;
+}
+
+.cell .btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.bg-orange {
+  background-color: orange;
+  color: white;
+}
+
