@@ -3,16 +3,25 @@
 html, body {
   height: 100%;
   margin: 0;
+  font-family: 游ゴシック体, 'Yu Gothic', YuGothic, 'ヒラギノ角ゴシック Pro', 'Hiragino Kaku Gothic Pro', メイリオ, Meiryo, Osaka, 'ＭＳ Ｐゴシック', 'MS PGothic', sans-serif;
 }
 
 .container {
   height: 100%;
 }
 
-.result {
+header {
   height: 25%;
   background-color: black;
+  position: relative;
+}
+
+.output {
+  position: absolute;
+  top: 40%;
+  right: 5%;
   color: white;
+  font-size: 96px;
 }
 
 .buttons {
@@ -45,6 +54,7 @@ html, body {
   position: relative;
   height: 100%;
   cursor: pointer;
+  font-size: 48px;
 }
 
 .cell .btn {
@@ -57,5 +67,9 @@ html, body {
 .bg-orange {
   background-color: orange;
   color: white;
+}
+
+.bg-gray {
+  background-color: darkgray;
 }
 
