@@ -57,6 +57,14 @@ header {
   font-size: 48px;
 }
 
+.cell.touched {
+  background-color: lightgray;
+}
+
+.cell.bg-orange.touched {
+  background-color: darkorange;
+}
+
 .cell .btn {
   position: absolute;
   top: 50%;

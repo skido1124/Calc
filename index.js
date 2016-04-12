@@ -106,35 +106,49 @@ var toggleNumber = function(){
   $output.trigger('update:output', input);
 };
 
-$(function(){
-  $('.cell').on('click', function(){
-    var btn = $(this).data('btn');
+var click = function(elm){
+  var btn = $(elm).data('btn');
 
-    switch (btn) {
-      case 'clear':
-        clear();
-        break;
-      case 'toggleNumber':
-        toggleNumber();
-        break;
-      case 'percent':
-        percent();
-        break;
-      case 'divide':
-      case 'multiply':
-      case 'subtract':
-      case 'add':
-        setCalc(btn);
-        break;
-      case 'point':
-        setPoint();
-        break;
-      case 'equal':
-        equal();
-        break;
-      default:
-        numeric(btn);
-        break;
+  switch (btn) {
+    case 'clear':
+      clear();
+      break;
+    case 'toggleNumber':
+      toggleNumber();
+      break;
+    case 'percent':
+      percent();
+      break;
+    case 'divide':
+    case 'multiply':
+    case 'subtract':
+    case 'add':
+      setCalc(btn);
+      break;
+    case 'point':
+      setPoint();
+      break;
+    case 'equal':
+      equal();
+      break;
+    default:
+      numeric(btn);
+      break;
+  }
+};
+
+$(function(){
+  $('.cell').on({
+    'touchstart mousedown': function(e){
+      $(this).addClass('touched');
+      e.preventDefault();
+    },
+    'touchmove mousemove': function(e){
+      e.preventDefault();
+    },
+    'touchend mouseup': function(){
+      $(this).removeClass('touched');
+      click(this);
     }
   });
 
