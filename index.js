@@ -1,15 +1,15 @@
-var output = 0, input = 0;
-var calc;
+var output = '', input = '';
+var calc, point = false, negative = false;
 var $output = $('.output');
 
 var clear = function(){
   $output.trigger('update:output', 0);
-  input = 0;
   output = 0;
+  refreshInput();
 };
 
 var numeric = function(val){
-  if (!input) {
+  if (input === '') {
     input = val;
   } else {
     input += String(val);
@@ -18,29 +18,33 @@ var numeric = function(val){
 };
 
 var setCalc = function(operator){
-  calc = operator;
-
   if (!output) {
     output = input;
-    input = 0;
-  } else if (input) {
+    refreshInput();
+  } else if (input > 0 && calc) {
     equal();
   }
+
+  calc = operator;
 };
 
 var equal = function(){
   var input1, input2;
 
-  if (!calc || !input) {
+  if (!calc || input === '') {
     return;
   }
 
-  input1 = parseInt(output, 10);
-  input2 = parseInt(input, 10);
+  input1 = parseFloat(output);
+  input2 = parseFloat(input);
 
   switch (calc) {
     case 'divide':
-      output = input1 / input2;
+      if (input2 === 0) {
+        output = 'Error';
+      } else {
+        output = input1 / input2;
+      }
       break;
     case 'subtract':
       output = input1 - input2;
@@ -56,7 +60,50 @@ var equal = function(){
   }
 
   $output.trigger('update:output', output);
-  input = 0;
+  calc = false;
+  refreshInput();
+};
+
+var setPoint = function(){
+  if (!input) {
+    return;
+  }
+
+  if (!point) {
+    point = true;
+    input += '.';
+  }
+};
+
+var percent = function(){
+  if (input === '') {
+    return;
+  }
+
+  input = String(parseFloat(input) / 100);
+  point = true;
+  $output.trigger('update:output', input);
+};
+
+var refreshInput = function(){
+  input = '';
+  point = false;
+};
+
+var toggleNumber = function(){
+  if (!input) {
+    return;
+  }
+
+  if (negative) {
+    negative = false;
+    input = input.substr(1);
+  } else {
+    negative = true;
+    input = '-' + input;
+  }
+
+  $output.trigger('update:output', input);
 };
 
 $(function(){
@@ -67,15 +114,20 @@ $(function(){
       case 'clear':
         clear();
         break;
-      case 'integer':
+      case 'toggleNumber':
+        toggleNumber();
         break;
       case 'percent':
+        percent();
         break;
       case 'divide':
       case 'multiply':
       case 'subtract':
       case 'add':
         setCalc(btn);
+        break;
+      case 'point':
+        setPoint();
         break;
       case 'equal':
         equal();
