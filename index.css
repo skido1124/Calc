@@ -3,7 +3,7 @@
 html, body {
   height: 100%;
   margin: 0;
-  font-family: 游ゴシック体, 'Yu Gothic', YuGothic, 'ヒラギノ角ゴシック Pro', 'Hiragino Kaku Gothic Pro', メイリオ, Meiryo, Osaka, 'ＭＳ Ｐゴシック', 'MS PGothic', sans-serif;
+  font-family: 'ヒラギノ角ゴシック Pro', 'Hiragino Kaku Gothic Pro', メイリオ, Meiryo, Osaka, 'ＭＳ Ｐゴシック', 'MS PGothic', sans-serif;
 }
 
 .container {
@@ -18,7 +18,7 @@ header {
 
 .output {
   position: absolute;
-  top: 40%;
+  top: 30%;
   right: 5%;
   color: white;
   font-size: 96px;

@@ -18,10 +18,14 @@ var numeric = function(val){
 };
 
 var setCalc = function(operator){
+  if (input === '') {
+    return;
+  }
+
   if (!output) {
     output = input;
     refreshInput();
-  } else if (input > 0 && calc) {
+  } else if (input > 0 && calc && output > 0) {
     equal();
   }
 
@@ -31,7 +35,7 @@ var setCalc = function(operator){
 var equal = function(){
   var input1, input2;
 
-  if (!calc || input === '') {
+  if (!calc || input === '' || output === '') {
     return;
   }
 
@@ -156,3 +160,6 @@ $(function(){
     $(this).text(val);
   });
 });
+
+console.log('success');
+console.error('error!!');
