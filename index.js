@@ -17,23 +17,21 @@ var numeric = function(val){
   $output.trigger('update:output', input);
 };
 
-var setCalc = function(operator){
-  if (input === '') {
+var setCalc = function(operator) {
+  if (input === '' && !calc && output === '') {
     return;
-  }
-
-  if (!output) {
-    output = input;
-    refreshInput();
   } else if (input > 0 && calc && output > 0) {
     equal();
+  } else if (input > 0) {
+    output = input;
+    refreshInput();
   }
 
   calc = operator;
 };
 
 var equal = function(){
-  var input1, input2;
+  var input1, input2, result;
 
   if (!calc || input === '' || output === '') {
     return;
@@ -45,25 +43,31 @@ var equal = function(){
   switch (calc) {
     case 'divide':
       if (input2 === 0) {
-        output = 'Error';
+        result = 'Error';
       } else {
-        output = input1 / input2;
+        result = input1 / input2;
       }
       break;
     case 'subtract':
-      output = input1 - input2;
+      result = input1 - input2;
       break;
     case 'multiply':
-      output = input1 * input2;
+      result = input1 * input2;
       break;
     case 'add':
-      output = input1 + input2;
+      result = input1 + input2;
       break;
     default:
       break;
   }
 
-  $output.trigger('update:output', output);
+  result = String(result);
+  if (result.length > 8) {
+    result = 'Error';
+  }
+
+  $output.trigger('update:output', result);
+  output = (result === 'Error') ? 0 : parseFloat(result);
   calc = false;
   refreshInput();
 };
@@ -160,6 +164,3 @@ $(function(){
     $(this).text(val);
   });
 });
-
-console.log('success');
-console.error('error!!');
