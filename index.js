@@ -9,7 +9,7 @@ var clear = function(){
 };
 
 var numeric = function(val){
-  if (input === '') {
+  if (input === '' || input === 0) {
     input = val;
   } else {
     input += String(val);
